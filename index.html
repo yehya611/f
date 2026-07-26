@@ -1,74 +1,556 @@
-<!DOCTYPE html>
-  <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Your Business Name - Get Your Professional Website</title>
-  <style>
-    :root{--primary:#2563eb;--primary-dark:#1d4ed8;--secondary:#7c3aed;--accent:#f59e0b;--dark:#0f172a;--light:#f8fafc;-
-  -gray:#64748b;--success:#10b981}
-    *{margin:0;padding:0;border:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe
-  UI',Roboto,Helvetica,Arial,sans-serif;line-height:1.5;color:#334155}
-    body{background:#f8fafc;min-height:100vh;display:flex;flex-direction:column;}
-
-    /* Header */
-    header{position:fixed;top:0;left:0;right:0;background:white;padding:1rem;z-index:999;box-shadow:0 2px 10px
-  rgba(37,99,235,.1);display:flex;justify-content:space-between;align-items:center;}
-    .logo{font-size:1.5rem;font-weight:bold;color:#2563eb;display:flex;flex-direction:column;line-height:1.2;}
-    .owner-badge{background:var(--dark);color:white;padding:.4rem
-  1rem;border-radius:8px;font-size:.9rem;text-align:center;margin-top:.2rem;}
-
-    /* Navigation */
-    nav ul{display:flex;gap:1.5rem;list-style:none;}
-    nav a{text-decoration:none;color:#334155;font-weight:600;font-size:.95rem;transition:color .3s;}
-    nav a:hover{color:var(--primary);}
-
-    /* Hero */
-    .hero{background:linear-gradient(135deg,var(--dark),#1e293b);color:white;padding:8rem 1.5rem
-  4rem;display:flex;flex-direction:column;align-items:center;text-align:center;}
-    .hero h1{font-size:2.8rem;margin-bottom:1rem;line-height:1.1;font-weight:700;}
-    .hero p{font-size:1.3rem;color:#cbd5e1;margin-bottom:2rem;max-width:600px;}
-
-
   <!DOCTYPE html>
   <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Your Business Name - Get Your Professional Website</title>
-  <style>
-    :root{--primary:#2563eb;--primary-dark:#1d4ed8;--secondary:#7c3aed;--accent:#f59e0b;--dark:#0f172a;--light:#f8fafc;--gray:#64748b;--success:#10b981}
-    *{margin:0;padding:0;border:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;line-height:1.5;color:#334155}
-    body{background:#f8fafc;min-height:100vh;display:flex;flex-direction:column;}
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Business Website Finder | Find Local Businesses Without Websites</title>
 
-    /* Header */
-    header{position:fixed;top:0;left:0;right:0;background:white;padding:1rem;z-index:999;box-shadow:0 2px 10px rgba(37,99,235,.1);display:flex;justify-content:space-between;align-items:center;}
-    .logo{font-size:1.5rem;font-weight:bold;color:#2563eb;display:flex;flex-direction:column;line-height:1.2;}
-    .owner-badge{background:var(--dark);color:white;padding:.4rem 1rem;border-radius:8px;font-size:.9rem;text-align:center;margin-top:.2rem;}
+      <!-- Google Maps API -->
+      <script src="https://maps.googleapis.com/maps/api/js?key=GMOY57682934XYZ&libraries=places"></script>
 
-    /* Navigation */
-    nav ul{display:flex;gap:1.5rem;list-style:none;}
-    nav a{text-decoration:none;color:#334155;font-weight:600;font-size:.95rem;transition:color .3s;}
-    nav a:hover{color:var(--primary);}
+      <style>
+          * {
+              margin: 0;
+              padding: 0;
+              box-sizing: border-box;
+          }
 
-    /* Hero */
-    .hero{background:linear-gradient(135deg,var(--dark),#1e293b);color:white;padding:8rem 1.5rem 4rem;display:flex;flex-direction:column;align-items:center;text-align:center;}
-    .hero h1{font-size:2.8rem;margin-bottom:1rem;line-height:1.1;font-weight:700;}
-    .hero p{font-size:1.3rem;color:#cbd5e1;margin-bottom:2rem;max-width:600px;}
+          body {
+              font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+              background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+              min-height: 100vh;
+              padding: 20px;
+          }
 
-    /* Buttons */
-    .btn{display:inline-block;padding:.8rem 2rem;background:white;border-radius:8px;font-weight:700;text-decoration:none;color:var(--dark);transition:transform .3s,box-shadow
-  .3s;margin-top:1.5rem;cursor:pointer;}
-    .btn:hover{transform:translateY(-3px);}
+          .container {
+              max-width: 1200px;
+              margin: 0 auto;
+          }
 
-    /* Problem Section */
-    .problem{background:white;padding:4rem 1.5rem;text-align:center;}
-    .problem h2{font-size:2.2rem;margin-bottom:1.5rem;color:#1e293b;}
-    .pain-points{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem,max-width:1000px;margin:0 auto;padding-top:3rem;}
+          header {
+              background: white;
+              border-radius: 20px;
+              padding: 30px;
+              text-align: center;
+              box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+              margin-bottom: 20px;
+          }
 
-    /* Portfolio */
-    .portfolio{background:var(--light);padding:4rem 1.5rem;text-align:center;overflow:hidden;}
-    .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:3rem;max-width:1200px;margin-left:auto;margin-right:auto;padding:0 auto;}
+          h1 {
+              color: #667eea;
+              font-size: 2.8rem;
+              margin-bottom: 10px;
+          }
 
-    /* Contact Form */
-    .contact-section{background:white;padding:4rem 1.5rem;text-align:center;color:#ffffff;}
+          .subtitle {
+              color: #555;
+              font-size: 1.3rem;
+              max-width: 800px;
+              margin: 0 auto;
+          }
+
+          .search-container {
+              background: white;
+              border-radius: 20px;
+              padding: 40px;
+              box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+              margin-bottom: 20px;
+          }
+
+          .search-form {
+              display: grid;
+              gap: 20px;
+          }
+
+          #city-input, #business-type {
+              width: 100%;
+              padding: 18px;
+              border: none;
+              border-radius: 50px;
+              font-size: 1.2rem;
+              outline: none;
+              box-shadow: inset -3px -3px 10px rgba(0,0,0,0.1);
+          }
+
+          #city-input:focus {
+              background: linear-gradient(90deg, #667eea15, transparent);
+              border-left: 4px solid #667eea;
+          }
+
+          button#search-btn {
+              padding: 20px 80px;
+              font-size: 1.5rem;
+              background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+              border-radius: 50px;
+              color: white;
+              cursor: pointer;
+              transition: transform 0.3s ease, box-shadow 0.3s ease;
+          }
+
+          button#search-btn:hover {
+              transform: translateY(-2px);
+              box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
+          }
+
+          #results-container {
+              background: white;
+              border-radius: 20px;
+              padding: 30px;
+              box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+              min-height: 50vh;
+          }
+
+          .results-header {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              margin-bottom: 25px;
+              padding-right: 143px;
+          }
+
+          .result-count {
+              font-size: 1.3rem;
+              color: #667eea;
+              font-weight: bold;
+          }
+
+          .business-card {
+              border-left: 5px solid #667eea;
+              background: linear-gradient(90deg, white 0%, #f8faff 100%);
+              margin-bottom: 20px;
+              padding: 30px;
+              border-radius: 15px;
+              transition: transform 0.3s ease, box-shadow 0.3s ease;
+          }
+
+          .business-card:hover {
+              transform: translateX(10px);
+              box-shadow: -10px 20px 40px rgba(102, 126, 234, 0.3);
+          }
+
+          .has-website {
+              border-left-color: #00b894;
+          }
+
+          .no-website {
+              border-left-color: #d63031;
+              background: linear-gradient(90deg, white 0%, #fff5f5 100%);
+          }
+
+          .has-website:hover {
+              box-shadow: -10px 20px 40px rgba(0, 184, 148, 0.3);
+          }
+
+          .no-website::before {
+              content: "🚫 NO WEBSITE AVAILABLE";
+              display: inline-block;
+              padding: 6px 25px;
+              background: #d63031;
+              color: white;
+              border-radius: 25px;
+              font-size: 0.9rem;
+              margin-left: auto;
+          }
+
+          .business-info h4 {
+              display: inline-block;
+              color: #333;
+              font-size: 1.6rem;
+              margin-bottom: 8px;
+          }
+
+          .website-link {
+              display: inline-block;
+              background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+              color: white !important;
+              padding: 10px 35px;
+              border-radius: 50px;
+              text-decoration: none;
+              font-weight: bold;
+              margin-top: 8px;
+          }
+
+          .contact-info {
+              display: flex;
+              gap: 20px;
+              color: #666 !important;
+              font-size: 1rem;
+              margin-bottom: 15px !important;
+          }
+
+          .address-box, .website-status {
+              background: white;
+              padding: 18px;
+              border-radius: 20px;
+              color: #667eea !important;
+          }
+
+          /* Loading overlay */
+          .loading {
+              position: fixed;
+              top: 0;
+              left: 0;
+              right: 0;
+              bottom: 0;
+              background: rgba(255,255,255,0.9);
+              display: none;
+              align-items: center;
+              justify-content: center;
+              flex-direction: column;
+          }
+
+          .loading.active {
+              display: flex;
+          }
+
+          .spinner {
+              width: 80px;
+              height: 80px;
+              border: 6px solid #e0e0ff;
+              border-top-color: #667eea;
+              border-radius: 50%;
+              animation: spin 1.2s linear infinite;
+          }
+
+          .spinner.active {
+              display: block !important;
+          }
+
+          @keyframes spin {
+              to { transform: rotate(360deg); }
+          }
+
+          /* Error overlay */
+          .error-overlay {
+              position: fixed;
+              top: 20px;
+              left: 50%;
+              transform: translateX(-50%);
+              background: #d63031;
+              color: white;
+              padding: 20px 40px;
+              border-radius: 50px;
+              box-shadow: 0 15px 40px rgba(214, 48, 49, 0.5);
+              display: none;
+          }
+
+          .error-overlay.active {
+              display: block !important;
+          }
+
+          /* Responsive */
+          @media (max-width: 768px) {
+              header h1 { font-size: 2rem; }
+
+              button#search-btn, #city-input::placeholder, #business-type::placeholder
+                { font-size: 1.2rem; padding-left: calc(30vw - 25rem); text-align: left;}
+
+              .contact-info { flex-direction: column; gap: 8px !important; }
+
+              h4 { color:#667eea !important}
+          }
+
+      </style>
+  </head>
+  <body>
+
+  <!-- Loading spinner -->
+  <div class="loading" id="loader">
+      <div class="spinner active"></div>
+      <p style="margin-top: 20px; font-size: 1.5rem;">Loading...</p>
+  </div>
+
+  <!-- Error overlay (hidden by default) -->
+  <div class="error-overlay" id="error-message"></div>
+
+
+  <div class="container">
+
+  <header>
+  <h1>🔍 Business Website Finder</h1>
+  <p class="subtitle">Find businesses without websites to help you grow your portfolio. Search any city and discover
+  local business owners who need digital presence.</p>
+  </header>
+
+  <section class="search-container">
+  <form id="search-form" class="search-form">
+      <!-- API Key -->
+  <input type="hidden" name="api_key" value="GMOY57682934XYZ">
+
+
+  <div>
+          <input
+              type="text"
+              placeholder="Enter city, state or zip code (e.g. San Francisco, CA)"
+              id="city-input"
+              required />
+      </div>
+
+      <!-- Business Types -->
+  <select name="business_type_select_multiple" multiple id="business-type">
+          <option value="" selected disabled>Select business types to search...</option>
+
+  <!-- Common Business Categories from Google Places API Data Sources (2017-2018)-->
+  <option value="/m/0y3h6q">General Contractors, Builders and Contractors</option>
+
+  <option value="cafe" data-name="Coffee Shop/Cafes"></option><option value="bakery" data-name="Bakeries &
+  Patisseries"></option>
+
+
+  <option value="bar" data-name="Bars & Clubs"></option>
+          <option value="ice_cream_shop" data-name="Ice Cream Shops"></option>
+
+          <!-- Restaurants -->
+
+      <optgroup label="Restaurants">
+          <option
+              value="/m/01q7k2g5h9t843n6d3j_2v_"
+              disabled
+
+    >Italian Restaurant</option>
+
+  <option
+
+             value="" /m/0y3h6q"
+               class="business-type">Burger Joint</option>
+
+
+          <option
+  value="/m/019b7r4c8t5x7w9e2a_6j_s_" data-name="American Restaurant"></option>
+
+  <option value="" /m/0y3h6q" class="business-type">Pizza Place, Sushi Roll</option>
+
+
+      </optgroup>
+
+  <!-- Retail -->
+  <optgroup label="Retail Stores">
+          <option
+  value="/m/019b7r4c8t5x7w9e2a_6j_s_" data-name="" /m/0y3h6q" class="business-type">Clothing Store</option>
+
+  <option value="/m/0dzc3g9f_h_j_k_l_m_n_o_p_q_r_s_t_u_v_w_x_y_z_a_b_c_d_e_f_g"></option><option
+
+          value="" /m/0y3h6q" class="business-type">Department Store, Grocery</option>
+
+
+  <option
+  value="/m/019b7r4c8t5x7w9e2a_6j_s_" data-name="" /m/0y3h6q"  >Bookstore/Newspaper/Boutique Shop</option><option
+  value=""></option></optgroup>
+
+  <!-- Professional Services -->
+  <optgroup label="Professional Services">
+          <option
+  value="/m/019b7r4c8t5x7w9e2a_6j_s_" data-name="" /m/0y3h6q" class="business-type">Attorney/Law Firm</option>
+
+  <option value=""></option><option
+
+          value="/m/019b7r4c8t5x7w9e2a_6j_s_"  disabled
+
+
+  data-name="" /m/0y3h6q" class="business-type">Medical/Clinic</option>
+
+  <!-- Financial -->
+  <optgroup label="Financial Services"></option><option value=""></option></optgroup>
+
+
+  <option
+  value="/m/019b7r4c8t5x7w9e2a_6j_s_" data-name="" /m/0y3h6q" class="business-type">Bank/Credit Union</option>
+
+      <option value=""></option><option
+
+          value="/m/0dzc3g9f_h_j_k_l_m_n_o_p_q_r_s_t_u_v_w_x_y_z_a_b_c_d_e_f_g"  data-name=""
+  /m/0y3h6q"></option></optgroup>
+
+  <!-- Home Improvement -->
+  <optgroup label="Home Services">
+          <option
+  value="/m/0dzc3g9f_h_j_k_l_m_n_o_p_q_r_s_t_u_v_w_x_y_z_a_b_c_d_e_f_g"  data-name="" /m/0y3h6q"
+  class="business-type"></option><option
+
+          value="/m/019b7r4c8t5x7w9e2a_6j_s_" disabled
+
+      >Plumber/HVAC/Electrician/Roofer</option>
+
+  <!-- Beauty Services -->
+  <optgroup label="Beauty & Personal Care">
+  <option
+  value="/m/0y3h6q" data-name="" /m/0dzc3g9f_h_j_k_l_m_n_o_p_q_r_s_t_u_v_w_x_y_z_a_b_c_d_e_f_g"></option>
+
+
+      <optgroup label="Beauty & Personal Care">
+  <option value="/m/yk_1z2a" data-name="" /m/0dzc3g9f_h_j_k_l_m_n_o_p_q_r_s_t_u_v_w_x_y_z_a_b_c_d_e_f_g"></option>
+
+
+          <option
+  value="/m/yk_1z2a"  class="business-type">Hair Salon/Wig Shop</option><option value=""></option></optgroup>
+  <option
+             disabled
+
+
+  data-name="" /m/0dzc3g9f_h_j_k_l_m_n_o_p_q_r_s_t_u_v_w_x_y_z_a_b_c_d_e_f_g"  class="business-type">Nail
+  Salon</option><option value=""></option></optgroup>
+
+  <!-- Fitness -->
+  <optgroup label="Fitness & Recreation">
+
+
+      <option
+  value="" /m/0dzc3g9f_h_j_k_l_m_n_o_p_q_r_s_t_u_v_w_x_y_z_a_b_c_d_e_f_g" class="business-type"></option><option
+
+          value="/m/yk_1z2a" data-name="">Health Club/Gym</option>
+  <option
+  value="" /m/0dzc3g9f_h_j_k_l_m_n_o_p_q_r_s_t_u_v_w_x_y_z_a_b_c_d_e_f_g" class="business-type"></option></optgroup>
+
+  <!-- Auto Services -->
+  <optgroup label="Auto & Repair">
+
+
+          <option
+
+  value="/m/yk_1z2a" data-name="" /m/0dzc3g9f_h_j_k_l_m_n_o_p_q_r_s_t_u_v_w_x_y_z_a_b_c_d_e_f_g"></option><option
+
+              value=""" class="business-type">Auto Repair Shop</option></optgroup>
+
+  <!-- Other Services -->
+  <optgroup label="Other Local Businesses">
+
+
+          <option
+  value="/m/yk_1z2a" data-name="" /m/0dzc3g9f_h_j_k_l_m_n_o_p_q_r_s_t_u_v_w_x_y_z_a_b_c_d_e_f_g"></option><option
+
+              value=""" class="business-type">Daycare</option>
+
+  <option
+
+  value="/m/yk_1z2a" data-name="" /m/0dzc3g9f_h_j_k_l_m_n_o_p_q_r_s_t_u_v_w_x_y_z_a_b_c_d_e_f_g"></option><option
+
+              value=""" class="business-type">Florist/Gift Shop</option>
+
+      <optgroup label="Other Local Businesses">
+  <option
+  value="/m/yk_1z2a"  class="business-type"></option><option
+
+          value=""" class="business-type">Laundry/Dry Cleaning/Spa/Salon/Carwash/Mechanic/Towing Service/Audio
+  Shop/Electronics Repair</option></optgroup>
+
+  <select name="" /m/0dzc3g9f_h_j_k_l_m_n_o_p_q_r_s_t_u_v_w_x_y_z_a_b_c_d_e_f_g" id="business-types">
+
+      </select><input
+          type="text"
+          placeholder="Enter specific business (optional)" />
+
+
+  <div>
+
+  <button  style="" /m/0dzc3g9f_h_j_k_l_m_n_o_p_q_r_s_t_u_v_w_x_y_z_a_b_c_d_e_f_g" id="search-btn">Search
+  Businesses</button></div><script
+  type="/m/yk_1z2a"></m/m>
+      <!-- Initialize Google Maps and Search -->
+
+
+  <!-- Business Results Container -->
+
+  <div class="" /m/0y3h6q results-container no-website" id="results-wrapper"></div> <p style=""
+  /m/0dzc3g9f_h_j_k_l_m_n_o_p_q_r_s_t_u_v_w_x_y_z_a_b_c_d_e_f_g">Type a city and click search to find businesses without
+  websites!</p><script type="/m/yk_1z2a"><!-- Initialize Google Maps -->
+  function initMap() {
+
+  var map = new google.maps.Map( document.getElementById("map-container") );
+
+
+  // Define the API client options. The apiKey is set by a server environment variable called "GOOGLE_API_KEY" which we
+  will populate with an actual key later: */m/0y3h6q*/
+  const DEFAULT_OPTIONS={};
+
+  /** Create our API service object, passing it to the maps library and map instance as well *// */ let api= new
+  google.maps.places.PlacesService(map);
+
+
+  // Helper function to show loading state when searching.} else {
+
+  var businesses = [];// Collect all selected business types from multi-select
+  const typeList=document.getElementById("business-type").querySelectorAll('.selected');;
+
+
+  /** Search for places in the specified area */ const request={query: city,type:&quot;&quot;;};
+
+
+
+  if(!api.isReady()) { return Promise.reject(new Error(&#39;API not ready&#39;)); }
+
+  let promises=[];
+  typeList.forEach((type,index) =>{const id=`search_${index}`;// Make API call to search for places of this type in area
+  const p=new Promise(resolve=>{
+
+  api.findPlaceFromQuery({name: city,type:,key:"GMOY57682934XYZ"},(results, status) =>
+  {if(status!&#x3D;OK){resolve([]);return;}
+  const businesses = results.map(r=&gt;r.result);resolve(businesses);});// Make a second call to get the more detailed
+  business information.}}).map(p=promise:await p.push(...promises));// Process all responses const
+  allBusinesses=Array.from(promises)
+
+
+  let websiteStatus=&#39;has-website&#39;;const hasWebsite = (business, key =&gt;{if(key && &quot;&quot;}{return
+  true;}else{return false;}
+
+  });
+
+
+
+  // Clear any previous results
+  document.getElementById(&#x27;&#x6104;/m/0dzc3g9f_h_j_k_l_m_n_o_p_q_r_s_t_u_v_w_x_y_z_a_b_c_d_e_f_g&#x27;).innerHTML=;
+  &quot;// Find businesses without websites and display themconst
+  noWebsiteBusinesses=allBusinesses.filter(b=&gt;!hasWebsite(
+  b));if(noWebsiteBusinesses.length&gt;0){document.getElementById(&#39;&#61458;/m/yk_1z2a&#x27;)
+
+
+  noWebsiteBusinesses.forEach((business, index) =&gt; {
+
+  const businessCard=document.createElement(&quot;&quot;;);businessCard.className=&quot;&quot; ;// Business name
+  businessCard.innerHTML=`&lt;p class="address-box"&gt;&lt;/p&gt`<br/>
+  &lt;br/&gt<br/>&lt;b style=&quot;color:#667eea&quot;&gt;-</b><span>`+business.name +
+  &apos;</span>${!hasWebsite(business)?‘’:’}
+
+
+  &lt;/div&gt`;
+
+  // Business phone number and addressif(&amp;#x2E;)document.getElementById(”&lt;p class="contact-info"&gt;br&gt
+  &lt;b style=&quot;color:#667eea&quot;&gt;-</b>&apos;// Add to results display if we found anyconst
+  container=document.getElementById&#39;&#45;/m/yk_1z2a)&#x27;
+
+  if(container.innerHTML){businessCard.style.display=`&lt;br/&gt&lt;b
+  style=&quot;color:#667eea&quot;&gt;-</b><span>${!hasWebsite(business)?‘’:’}
+
+
+  &lt;/p&gt`;
+
+  container.append(child);});
+
+
+
+  /** Add loading animation */
+  document.getElementById(&#39;&#x6104&#x2E;)classList.add(&quot;active&quot;;)
+
+
+  /* Search handler*/ document.getElementById(&quot;&quot;)&.addEventListener("click"&gt;(e =&gt; {const city=
+  (&amp;#x58;.innerHTML).trim();
+  if(!city){document.getElementById(&#39;&#61457;/m/0y3h6q&#39;)classList.add(&&quot;active&quot;;return;}
+
+  /** Clear results */
+
+
+
+  // Start search document.getElementById(&quot;&quot;))
+
+
+  initMap()}),false);</script>
+
+      <!-- Footer -->
+  <footer style="background:white;border-radius:20px;padding:30px;text-align:center;color:#667eea;margin-top:40px;">
+  <p><strong>Note:</strong> This tool helps you find businesses without websites to add to your portfolio. The Google
+  Maps API integration provides access to local business listings.</p>
+
+  </footer></div><!-- Placeholder Map (hidden, used for API initialization) -->
+
+
+  <!-- Hidden map container required by Google Maps API --> <map-container id="map"
+  style="display:none;"&gt;&lt;/map&gt;</body><html/>
